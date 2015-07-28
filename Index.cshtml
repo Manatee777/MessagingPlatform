@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MManatee.Models.Message>
+
+@{
+    ViewBag.Title = "Index";
+   
+}
+<h1><img src="~/Content/manatee.png" /></h1>
+<h2>Inbox / @Html.ActionLink("Notifikace", "SwitchBox")</h2> 
+
+<p>
+    <b> @Html.ActionLink("Napsat zprávu", "Create")</b>
+</p>
+<table class="table">
+    
+
+    <tr>
+
+        <th>
+            Předmět
+        </th>
+        
+        <th>
+            Příjemce
+        </th>
+        <th>
+            Odesilatel
+        </th>
+        <th>
+            Datum
+        </th>
+        <th>
+            Přečteno
+        </th>
+        <th></th>
+    </tr>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReadState)
+        </td>
+        <td>
+            
+            @Html.ActionLink("Zobrazit", "Details", new { id = item.MessageID }) |
+            @Html.ActionLink("Smazat", "Delete", new { id = item.MessageID })|
+            @Html.ActionLink("Odpověď", "Response", new { id = item.MessageID })
+           
+        </td>
+    </tr>
+}
+
+</table>
